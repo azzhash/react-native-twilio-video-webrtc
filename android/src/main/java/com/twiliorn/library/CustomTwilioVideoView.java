@@ -317,51 +317,53 @@ public class CustomTwilioVideoView extends View implements LifecycleEventListene
 
     @Override
     public void onHostPause() {
-        /*
-         * Release the local video track before going in the background. This ensures that the
-         * camera can be used by other applications while this app is in the background.
-         */
-        if (localVideoTrack != null) {
-            /*
-             * If this local video track is being shared in a Room, remove from local
-             * participant before releasing the video track. Participants will be notified that
-             * the track has been removed.
-             */
-            if (localParticipant != null) {
-                localParticipant.unpublishTrack(localVideoTrack);
-            }
+        Log.i("CustomTwilioVideoView", "On Host Pause");
+        // /*
+        //  * Release the local video track before going in the background. This ensures that the
+        //  * camera can be used by other applications while this app is in the background.
+        //  */
+        // if (localVideoTrack != null) {
+        //     /*
+        //      * If this local video track is being shared in a Room, remove from local
+        //      * participant before releasing the video track. Participants will be notified that
+        //      * the track has been removed.
+        //      */
+        //     if (localParticipant != null) {
+        //         localParticipant.unpublishTrack(localVideoTrack);
+        //     }
 
-            localVideoTrack.release();
-            localVideoTrack = null;
-        }
+        //     localVideoTrack.release();
+        //     localVideoTrack = null;
+        // }
     }
 
     @Override
     public void onHostDestroy() {
-        /*
-         * Always disconnect from the room before leaving the Activity to
-         * ensure any memory allocated to the Room resource is freed.
-         */
-        if (room != null && room.getState() != Room.State.DISCONNECTED) {
-            room.disconnect();
-            disconnectedFromOnDestroy = true;
-        }
+        Log.i("CustomTwilioVideoView", "On Host Destroy");
+        // /*
+        //  * Always disconnect from the room before leaving the Activity to
+        //  * ensure any memory allocated to the Room resource is freed.
+        //  */
+        // if (room != null && room.getState() != Room.State.DISCONNECTED) {
+        //     room.disconnect();
+        //     disconnectedFromOnDestroy = true;
+        // }
 
-        /*
-         * Release the local media ensuring any memory allocated to audio or video is freed.
-         */
-        if (localVideoTrack != null) {
-            localVideoTrack.release();
-            localVideoTrack = null;
-        }
+        // /*
+        //  * Release the local media ensuring any memory allocated to audio or video is freed.
+        //  */
+        // if (localVideoTrack != null) {
+        //     localVideoTrack.release();
+        //     localVideoTrack = null;
+        // }
 
-        if (localAudioTrack != null) {
-            localAudioTrack.release();
-            localAudioTrack = null;
-        }
+        // if (localAudioTrack != null) {
+        //     localAudioTrack.release();
+        //     localAudioTrack = null;
+        // }
 
-        // Quit the data track message thread
-        dataTrackMessageThread.quit();
+        // // Quit the data track message thread
+        // dataTrackMessageThread.quit();
 
 
     }
